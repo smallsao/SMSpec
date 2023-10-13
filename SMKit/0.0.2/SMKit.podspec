@@ -28,15 +28,33 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'git@github.com:smallsao/SMKit.git', :branch => 'main' }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '13.0'
 
-  s.source_files = ['SMKit/SMKit/Classes/**/*.swift']
+  # s.source_files = ['SMKit/SMKit/Classes/**/*.swift']
+  
+  s.source_files = 'SMKit/SMKit/SMKit.h'
 
-  # s.subspec 'Extension' do |extension|
-  #   extension.source_files = 'SDWebImage/Core/*.{h,m}', 'WebImage/SDWebImage.h', 'SDWebImage/Private/*.{h,m}'
+  # s.subspec 'SMKit' do |ss|
+  s.subspec 'Extension' do |sss|
+
+    sss.subspec 'Foundation' do |ssss|
+      ssss.source_files = ['SMKit/SMKit/Classes/Extension/Foundation/*.swift','SMKit/SMKit/Classes/Extension/SMExtension.swift']
+      # 
+    end
+
+    sss.subspec 'UI' do |ssss|
+      ssss.source_files = ['SMKit/SMKit/Classes/Extension/UI/*.swift','SMKit/SMKit/Classes/Extension/SMExtension.swift']
+    end
+  end
+
+  s.subspec 'Tools' do |sss|
+    sss.source_files = 'SMKit/SMKit/Classes/Tools/*.swift'
+    sss.dependency 'SMKit/Extension'
+  end
   # end
 
-  s.swift_version = '4.2'
+
+  s.swift_version = '5'
   
   # s.resource_bundles = {
   #   'SMKit' => ['SMKit/Assets/*.png']
